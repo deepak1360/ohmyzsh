@@ -41,3 +41,39 @@ else
 fi
 
 
+
+
+if [ -z "$ZSH_COMPDUMP" ]; then
+  ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump-${SHORT_HOST}-${ZSH_VERSION}"
+fi
+
+if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
+
+
+if ! compaudit &>/dev/null; then
+
+  handle_completion_insecurities
+  
+  
+  else
+    compinit -d "${ZSH_COMPDUMP}"
+  fi
+else
+  compinit -i -d "${ZSH_COMPDUMP}"
+fi
+
+
+for plugin ($plugins); do
+  if [ -f $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh ]; then
+    source $ZSH_CUSTOM/plugins/$plugin/$plugin.plugin.zsh
+  elif [ -f $ZSH/plugins/$plugin/$plugin.plugin.zsh ]; then
+    source $ZSH/plugins/$plugin/$plugin.plugin.zsh
+  fi
+done
+
+for config_file ($ZSH_CUSTOM/*.zsh(N)); do
+
+ source $config_file
+done
+unset config_file
+
