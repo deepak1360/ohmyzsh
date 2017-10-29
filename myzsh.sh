@@ -19,3 +19,25 @@ for config_file ($ZSH/lib/*.zsh); do
   [ -f "${custom_config_file}" ] && config_file=${custom_config_file}
   source $config_file
 done
+
+
+s_plugin() {
+  local base_dir=$1
+  local name=$2
+  test -f $base_dir/plugins/$name/$name.plugin.zsh \
+    || test -f $base_dir/plugins/$name/_$name
+	
+	for plugin ($plugins); do
+  if is_plugin $ZSH_CUSTOM $plugin; then
+    fpath=($ZSH_CUSTOM/plugins/$plugin $fpath)
+  elif is_plugin $ZSH $plugin; then
+    fpath=($ZSH/plugins/$plugin $fpath)
+  fi
+donef [[ "$OSTYPE" = darwin* ]]; then
+  # macOS's $HOST changes with dhcp, etc. Use ComputerName if possible.
+  SHORT_HOST=$(scutil --get ComputerName 2>/dev/null) || SHORT_HOST=${HOST/.*/}
+else
+  SHORT_HOST=${HOST/.*/}
+fi
+
+
