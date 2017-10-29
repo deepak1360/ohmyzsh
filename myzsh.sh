@@ -21,6 +21,18 @@ for config_file ($ZSH/lib/*.zsh); do
 done
 
 
+if ! compaudit &>/dev/null; then
+
+  handle_completion_insecurities
+  
+  
+  else
+    compinit -d "${ZSH_COMPDUMP}"
+  fi
+else
+  compinit -i -d "${ZSH_COMPDUMP}"
+fi
+
 s_plugin() {
   local base_dir=$1
   local name=$2
@@ -50,17 +62,7 @@ fi
 if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
 
 
-if ! compaudit &>/dev/null; then
 
-  handle_completion_insecurities
-  
-  
-  else
-    compinit -d "${ZSH_COMPDUMP}"
-  fi
-else
-  compinit -i -d "${ZSH_COMPDUMP}"
-fi
 
 
 for plugin ($plugins); do
