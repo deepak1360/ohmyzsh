@@ -48,3 +48,9 @@ For example, this line might begin to look like this:
 ```shell
 plugins=(git bundler osx rake ruby)
 ```
+
+#### Using Plugins
+
+Most plugins (should! we're working on this) include a __README__, which documents how to use them.
+
+### Themes
