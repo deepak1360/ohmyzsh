@@ -111,4 +111,14 @@ To disable automatic upgrades, set the following in your `~/.zshrc`:
 
 ```shell
 DISABLE_AUTO_UPDATE=true
+
+
+## Follow Us
+
+Social media.
+
+* [@ohmyzsh](https://twitter.com/ohmyzsh) on Twitter. You should follow it.
+* [Oh My Zsh](https://www.facebook.com/Oh-My-Zsh-296616263819290/) on Facebook.
+
+#
 ```
